@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Sender</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="icons/icon48.png" alt="Logo" style="width: 48px; height: 48px; margin-bottom: 10px;">
+            <h1>Email Sender</h1>
+            <p>Fill the form to send a personalized email</p>
+        </div>
+
+        <div class="mode-container">
+            <span class="mode-label">Single</span>
+            <label class="switch">
+                <input type="checkbox" id="modeSwitch">
+                <span class="slider round"></span>
+            </label>
+            <span class="mode-label">Bulk</span>
+        </div>
+
+        <form id="emailForm">
+            <div id="singleFields">
+                <div class="form-group">
+                    <label for="email">Valid Email ID <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="rahul@tigihr.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="companyName">Company Name <span class="required">*</span></label>
+                    <input type="text" id="companyName" name="companyName" placeholder="ABC LLP">
+                </div>
+
+                <div class="form-group">
+                    <label for="personName">Person's Name <span class="required">*</span></label>
+                    <input type="text" id="personName" name="personName" placeholder="Rahul">
+                </div>
+            </div>
+
+            <div id="bulkFields" class="hidden">
+                <div class="form-group">
+                    <label for="bulkEmails">Paste Emails (one per line) <span class="required">*</span></label>
+                    <textarea id="bulkEmails" name="bulkEmails"
+                        placeholder="devang@proclink.com&#10;paulomi.bhatt@proclink.com" rows="6"></textarea>
+                </div>
+                <button type="button" id="previewBtn" class="btn-submit" style="margin-top: 10px;">Preview List</button>
+            </div>
+
+            <div id="previewContainer" class="hidden">
+                <div class="preview-controls">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="firstNameOnly" class="checkbox-input">
+                        <label for="firstNameOnly" class="checkbox-label" style="font-size: 12px;">Use First Name
+                            Only</label>
+                    </div>
+                    <button type="button" id="backToEditBtn" class="btn-secondary">Back</button>
+                </div>
+
+                <div class="delay-settings">
+                    <label>Delay (sec):</label>
+                    <input type="number" id="minDelay" value="10" min="0" max="300">
+                    <span>to</span>
+                    <input type="number" id="maxDelay" value="15" min="0" max="300">
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="previewTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 30px;">#</th>
+                                <th>Email</th>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th style="width: 40px; text-align: center;">Link</th>
+                                <th style="width: 30px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="previewBody">
+                            <!-- Rows will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="form-group" id="globalLinkOption">
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="includeLink" name="includeLink" class="checkbox-input">
+                    <label for="includeLink" class="checkbox-label">
+                        Include Link in Email (Default)
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">
+                Send Email
+            </button>
+        </form>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p style="margin-top: 10px; color: #666; font-size: 13px;">Sending email...</p>
+        </div>
+
+        <div class="message" id="message"></div>
+
+        <div class="config-section">
+            <div class="config-toggle" id="configToggle">
+                <span>⚙️ Configure Webhook</span>
+                <span id="toggleIcon">▼</span>
+            </div>
+
+            <div class="config-content" id="configContent">
+                <div class="webhook-url-input">
+                    <input type="text" id="webhookUrl" placeholder="http://localhost:5678/webhook/...">
+                    <button type="button" class="btn-save" id="saveWebhookBtn">
+                        Save
+                    </button>
+                </div>
+                <div class="info-box">
+                    💡 Enter your webhook URL (e.g. n8n localhost). It will be saved automatically.
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>
